@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+        <title>Prefeitura de Pedra Azul</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="description" content="Prefeitura de Pedra Azul - Minas Gerais" />
+        <meta name="subject" content="Prefeitura de Pedra Azul - Minas Gerais" />
+        <meta name="document-rating" content="GENERAL" />
+        <meta name="document-state" content="dynamic" />
+        <meta name="REVISIT-AFTER" content="5 days" />
+        <meta name="LANGUAGE" content="Portuguese" />
+        <meta name="ROBOTS" content="index, follow" />
+        <meta name="GOOGLEBOT" content="INDEX, FOLLOW" />
+        <meta name="audience" content="all" />
+        <meta name="AUTHOR" content="WVX Sites e Sistemas para Internet Ltda <rogeriorpaf@gmail.com>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta property="og:site_name" content="Prefeitura de Pedra Azul" />
+    <meta property="og:description" content="Prefeitura de Pedra Azul - Minas Gerais" />
+    <meta property="og:type" content="website" />
+        <link rel="canonical" href="http://www.pedraazul.mg.gov.br/" />
+    <meta property="og:image"  content="http://www.wvx.com.br/projetos/pedraazul/img/favicon.png">
+        <meta property="og:locale" content="pt_BR" />
+        <meta property="og:title" content="Prefeitura de Pedra Azul" />
+        <meta property="og:description" content="" />
+        <meta property="og:url" content="http://www.pedraazul.mg.gov.br/" />
+        <meta property="og:site_name" content="Prefeitura de Pedra Azul" />
+        <meta property="article:publisher" content="https://www.facebook.com/" />
+        <meta property="og:image" content="https://www.pedraazul.mg.gov.br/img/imagemOG.jpg" />
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+
+    <!-- Custom CSS -->
+    <link href="css/modern-business.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style type="text/css">
+<!--
+.style1 {color: #006633}
+-->
+    </style>
+
+        <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+        <script>
+
+                $(document).ready(function () {
+                $('#myModal').modal('show');
+                });
+
+        </script>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-fixed-top topnav" role="navigation">
+        <div class="container topnav">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand topnav" href="index.php"><img src="img/logo.jpg" border="0" alt="Prefeitura Pedra Azul"></a>
+            </div>
+                        <br><br><br>
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" align="right">
+                                 <?php include ('menu.php'); ?>
+                        </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Header Carousel -->
+    <header id="myCarousel" class="carousel slide">
+
+        <?php
+                   include("GerBLUStone/bdconBLUStone/con_bancoBLUStone.php");
+
+                   $queryOptions = "select
+                                                        principalBanner,
+                                                        statusBanner,
+                                                        ordemBanner
+                                         from  banner
+                                         where statusBanner = 'A'
+                                         order by principalBanner DESC, ordemBanner ASC
+                                        ";
+
+                   $resultOptions = mysql_query($queryOptions,$con);
+
+                   $x = mysql_num_rows($resultOptions);
+
+                   while($arrayresultOptions = mysql_fetch_array($resultOptions))
+        ?>
+
+        <!-- Indicators -->
+
+        <ol class="carousel-indicators">
+                  <?php
+                    {
+
+                        echo $arrayresultOptions[principalBanner];
+
+                          for($i = 0; $i < $x; $i++){
+                                  echo "<li data-target=\"#myCarousel\" data-slide-to=\"$i\"";
+
+                                          if($i == 0){
+                                                 print "class=\"active\"></li>";
+                                          }
+                                          else {
+                                                 print "></li>";
+                                          }
+                        }
+                  ?>
+        </ol>
+     <?php
+                }
+         ?>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner role="listbox"">
+                        <?php
+                                $i = 0;
+
+                                $query = "select enderecoBanner,
+                                                                urlBanner,
+                                                                date_format(dataBanner, '%d/%m/%Y') as data,
+                                                                fraseBanner,
+                                                                principalBanner,
+                                                                statusBanner,
+                                                                ordemBanner
+                                                  from  banner
+                                                  where statusBanner = 'A'
+                                                  order by principalBanner DESC, ordemBanner ASC
+                                                 ";
+
+                            $result = mysql_query($query,$con);
+                                $x = mysql_num_rows($result);
+
+                                while($arrayresult = mysql_fetch_array($result))
+                                {
+
+                                $i++;
+                        ?>
+
+                                <div class="item <?php if($arrayresult[principalBanner] == SIM) print "active";?>">
+
+                                        <a href="<?php print $arrayresult[urlBanner];?>"><div class="fill" style="background-image:url('<?php print $arrayresult[enderecoBanner];?>');"></div></a>
+
+                                         <div class="carousel-caption">
+                                              <h2><?php print $arrayresult[fraseBanner];?></h2>
+                          <!-- <p> </p> -->
+                                        </div>
+
+                </div>
+                        <?php
+                                }
+                        ?>                                                                                    
+
+         </div>
+
+        <!-- Controls -->
+        <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+            <span class="icon-prev"></span>
+        </a>
+
+        <a class="right carousel-control" href="#myCarousel" data-slide="next">
+            <span class="icon-next"></span>
+        </a>
+
+    </header>
+
+<!-- Modal Avisos-->
+        <?php
+           $queryAviso = "select enderecoBanner,
+                                                urlBanner,
+                                                linkArquivo,
+                                                date_format(dataBanner, '%d/%m/%Y') as data,
+                                                statusBanner,
+                                                ordemBanner,
+                                                bannerInterno,
+                                                area
+
+                                 from  bannersPromocoes
+                                 where statusBanner = 'A'
+                                 and area != 'licitacoes'
+                                 order by idBanner Desc
+                                 limit 3
+                                ";
+
+           $resultAviso = mysql_query($queryAviso,$con);
+           $x = mysql_num_rows($resultAviso);
+
+                   if($x > 0) {
+
+                                    echo "<div class=\"modal fade\" id=\"myModal\" tabindex=\"10\" role=\"dialog\" aria-labelledby=\"myModalLabel\" aria-hidden=\"true\">
+                                                   <div class=\"modal-dialog\" >
+                                                        <div class=\"modal-content\">
+                                                                  <div class=\"modal-header\">
+                                                                        <button type=\"button\" class=\"close\" data-dismiss=\"modal\"><span aria-hidden=\"true\">&times;</span><span class=\"sr-only\">Fechar</span></button>
+                                                                  </div>
+                                                      <div class=\"modal-body\">";
+
+                                                                          while($arrayresultAviso = mysql_fetch_array($resultAviso))
+                                                                          {
+                                                                                $bannerTopo =  "$arrayresultAviso[enderecoBanner]";
+                                                                                $link =  "$arrayresultAviso[linkArquivo]";
+
+                                                                                echo "<a href=\"$link\" target=\"_self\"><img class=\"img-responsive\" src=\"$bannerTopo\" alt=\"Prefeitura de Pedra Azul\"  border=\"0\"></a><br>";
+                                                                          }                                   
+                                        echo "        </div>
+
+                                                        </div>
+                                                  </div>
+                                             </div>";
+               }
+    ?>
+
+    <!-- Page Content -->
+    <div class="container">
+          <br><br><br>
+            <div class="col-lg-3">
+                       <div class="row">
+                                 <div class="col-md-12">
+                                    <br><br>
+
+                                    <a href="https://www.pedraazul.mg.gov.br/editais_concursos.php"> <img class="img-responsive" src="img/EditaisConcursos.jpg" alt="Editais, Concursos, Processos Seletivos"  border="0"> </a><br>
+
+                                        <h4 class="page-header  acessibilidade" style="color:#009900"><i class="fa fa-file-pdf-o"></i> �LTIMOS EDITAIS</h4>
+
+                                        <div class="well" style="background-color: #336600">
+
+                            <?php
+                                                                  $queryLic = " select idLic,
+
+                                                                                                objeto
+
+                                                                                                from  licitacao
+
+                                                                                                where statusLic = 'A'
+
+                                                                                        and destaque = 'S'
+
+                                                                                                order by idLic desc
+
+                                                                                                limit 3";
+
+                                                           $resultLic = mysql_query($queryLic,$con);
+
+                                                                   while($arrayresultLic = mysql_fetch_array($resultLic))
+                                                                   {
+                                                        ?>
+                                                                   <p><a href="<?php print("licitacaoCodigo.php?codigo=$arrayresultLic[idLic]");?>" class="acessibilidade" style="color:#FFFFFF"><?php print("<i class=\"fa fa-fw fa-check\"></i>$arrayresultLic[objeto]");?> </a></p><br>
+                                                        <?php
+                                                               }
+
+                                                        ?>
+                                        </div>
+
+
+                                        <div class="well">
+
+                            <?php
+                                                                  $queryLic = " select idLic,
+
+                                                                                                objeto
+
+                                                                                                from  licitacao
+
+                                                                                                where statusLic = 'A'
+
+                                                                                                order by idLic desc
+
+                                                                                                limit 7";
+
+                                                           $resultLic = mysql_query($queryLic,$con);
+
+                                                                   while($arrayresultLic = mysql_fetch_array($resultLic))
+                                                                   {
+                                                        ?>
+                                                                   <p><a href="<?php print("licitacaoCodigo.php?codigo=$arrayresultLic[idLic]");?>" class="acessibilidade"><?php print("<i class=\"fa fa-fw fa-check\"></i>$arrayresultLic[objeto]");?> </a></p><br>
+                                                        <?php
+                                                               }
+
+                                                        ?>
+
+                                                        <a href="licitacao.php" target="_self"  class="acessibilidade"  style="color:#009900">VER TODOS OS EDITAIS</a><br><br>                                              
+                                        </div>
+                                 </div>
+              </div>
+            </div>
+
+                        <div class="col-lg-6">
+                       <div class="row">
+                                 <div class="col-md-12">
+                                    <br><br>
+                                        <?php
+                                                   $queryBannerCentral = "select idBanner,
+                                                                                                              enderecoBanner,
+                                                                                                              urlBanner,
+                                                                                                              statusBanner
+                                                                                                  from  bannerCentral
+                                                                                                  where statusBanner = 'A'
+                                                                                                  order by dataBanner desc
+                                                                                                  limit 3
+                                                                                                 ";
+
+                                                   $resultBannerCentral = mysql_query($queryBannerCentral,$con);
+
+                                                   while($arrayresultBannerCentral = mysql_fetch_array($resultBannerCentral))
+                                                   {
+                                        ?>
+
+                                                   <a href="<?php print $arrayresultBannerCentral[urlBanner];?>" target="_blank" class="acessibilidade"><img class="img-responsive" src="<?php print $arrayresultBannerCentral[enderecoBanner];?>" border="0"></a><br>
+                                        <?php
+                                               }
+                                        ?>
+
+
+
+                    <?php
+                                                   $query = "select *
+                                                                         from video
+                                                                         where desktopVD = 'S'
+                                                                         order by dataPubVd desc
+                                                                         limit 1";
+                                                   $result = mysql_query($query,$con);
+                                                   while($arrayresult = mysql_fetch_array($result))
+                                                   {
+                                        ?>
+                                                   <div class="embed-responsive embed-responsive-16by9">
+                                                                        <br><br><iframe width="410" height="320" src="<?php print("$arrayresult[enderecoVd]");?>" frameborder="0" allowfullscreen></iframe>
+                                                   </div>
+                                        <?php
+                                               }
+                                    ?>
+
+                                        <br><br><br>
+                                        <a href="covid_saibaMais.php" target="_self"><img class="img-responsive" src="img/combateCovid19.png" alt="Prefeitura Pedra Azul"  border="0"></a>
+
+                     </div>
+                          </div>
+            </div>
+
+                        <div class="col-lg-3">
+                       <div class="row">
+                                 <div class="col-md-12">
+                                    <br><br>
+
+                                        <?php
+                                         /*<a href="https://falabr.cgu.gov.br/publico/Manifestacao/SelecionarTipoManifestacao.aspx?ReturnUrl=%2f"> <img class="img-responsive" src="img/ouvidoria.jpg" alt="Ouvidoria Prefeitura Pedra Azul"  border="0"> </a>*/
+                                        ?>
+
+                                        <a href="redirecionaFalaBR.php"> <img class="img-responsive" src="img/ouvidoria.jpg" alt="Ouvidoria Prefeitura Pedra Azul"  border="0"> </a><br>
+
+                                        <h4 class="page-header acessibilidade" style="color:#009900"><i class="fa fa-newspaper-o" ></i> �LTIMAS NOT�CIAS</h4>
+                                        <div class="well">
+                            <?php
+                                                                  $query = "select idNoticia,
+                                                                                                   tituloNoticia
+                                                                                         from  noticia
+                                                                                         where statusNoticia = 'A'
+                                                                                         and tipo = 'N'
+                                                                                         order by idNoticia DESC
+                                                                                         limit 18
+                                                                                        ";
+
+                                                                   $result = mysql_query($query,$con);
+
+                                                                           ### Testa retorno
+
+                                                                                   if(mysql_num_rows($result) < 1) {
+
+                                                                                          // echo "<meta HTTP-EQUIV='Refresh' CONTENT='0;URL=index.php'>";
+
+                                                                                          // die();
+                                                                                   }                          
+
+                                                                   while($arrayresult = mysql_fetch_array($result))
+                                                                   {
+                                                        ?>
+                                                                   <p"><a href="<?php print("noticiaCompleta.php?codigo=$arrayresult[idNoticia]");?>" class="acessibilidade"><?php print("<i class=\"fa fa-fw fa-check\"></i> $arrayresult[tituloNoticia]");?> </a></p><br>
+
+                                                        <?php
+                                                       }
+                                                ?>
+
+                                                        <a href="noticias.php" target="_self" class="acessibilidade" style="color:#009900">VER TODAS AS NOT�CIAS </a><br><br>
+                                        </div>
+                                 </div>
+            </div>
+                </div>
+
+        </div>
+
+        <!-- /.row -->
+        <br><br><br>
+
+        <!-- Marketing Icons Section -->
+  </div>
+
+    <!-- Faixa V�deo Promocional -->
+    <faixa class="text-center">
+        <div class="faixa-above">
+            <div class="container">
+                                        <div class="row" align="center">
+                                                <div class="col-lg-4">
+                                                        <span class="fa-stack fa-4x">
+                                                                <a href="https://www.pedraazul.mg.gov.br/licitacao.php" target="_self"><i class="fa fa-circle fa-stack-2x text-warning"></i>
+                                                                <i class="fa fa-newspaper-o fa-stack-1x fa-inverse"></i></a>
+                                                        </span>
+                                                        <h3 class="acessibilidade">Licita��es</h3>            
+                                                        <p class="acessibilidade"><a href="https://www.pedraazul.mg.gov.br/licitacao.php" style="color:#FFFFFF">Acompanhe as publica��es de Editais de Licita��es e Contratos na integra.</a> </p>
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                        <span class="fa-stack fa-4x">
+                                                                <a href="https://pmpedraazul.cidadesmg.com.br/portaltransparencia/"> <i class="fa fa-circle fa-stack-2x text-warning"></i>
+                                                                <i class="glyphicon glyphicon-check fa-stack-1x fa-inverse"></i></a>
+                                                        </span>
+                                                        <h3 class="acessibilidade">Portal da Transpar�ncia</h3>
+                                                        <p class="acessibilidade"><a href="https://pmpedraazul.cidadesmg.com.br/portaltransparencia/" style="color:#FFFFFF">Acompanhe o portal Transpar�ncia onde existe informa��es de  todas as atividades fiscais do munic�pio.</a></p><br>
+
+                                                </div>
+
+                                                <div class="col-lg-4">
+                                                        <span class="fa-stack fa-4x">
+                                                                <a href="http://sistema.sintesetecnologia.com.br/NFEWeb/indexNFe.xhtml?Param=PedraAzul"><i class="fa fa-circle fa-stack-2x text-warning"></i>
+                                                                <i class="glyphicon glyphicon-th fa-stack-1x fa-inverse"></i></a>
+                                                        </span>
+                                                        <h3 class="acessibilidade">Nota Fiscal Eletr�nica</h3>
+                                                        <p class="acessibilidade"><a href="http://sistema.sintesetecnologia.com.br/NFEWeb/indexNFe.xhtml?Param=PedraAzul" style="color:#FFFFFF">Acesse o portal de Nota Fiscal Eletr�nica e emita as suas notas de servi�os com toda seguran�a.</a></p>
+                                                </div>
+                                        </div>
+            </div>
+                </div>
+    </faixa>
+
+
+
+                <BR><BR>
+
+                <div class="banner2">
+                                <div class="container">
+                                        <div class="row" align="center">
+                                                <div class="col-lg-4" align="left">
+                                                                <h4 class="acessibilidade" style="color:#009900">DECRETOS, LEIS E PORTARIAS</h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                                <div class="col-lg-9">
+                                                                                        <a href="decretos.php"  target="_self" class="acessibilidade">DECRETOS</a><br><br>
+                                                                                        <a href="leis.php"      target="_self" class="acessibilidade">LEIS</a><br><br>
+                                                                                        <a href="portarias.php" target="_self" class="acessibilidade">PORTARIAS</a><br><br>
+                                                                                </div>
+                                                                                <div class="col-lg-3">
+                                                                                        <img class="img-responsive" src="img/brasao.jpg" alt="Prefeitura de Pedra Azul"  border="0">                                        
+                                                                                </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+                                                                <h4 class="acessibilidade" style="color:#009900">CONCURSOS</h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                                <div class="col-lg-12">
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/editalChamamentoPublico012022.php" target="_blank">EDITAL DE CHAMAMENTO P�BLICO N� 01/2022 - OSC</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/editalProcessoSeletivoSimplifEducacao012022.php" target="_blank">EDITAL DE PROCESSO SELETIVO SIMPLIFICADO DA EDUCA��O N� 001/2022</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/editalChamamentoPublico012021.php" target="_blank">EDITAL DE CHAMAMENTO P�BLICO N� 01/2021 - CMDCA</a><br><br>
+
+                                           <a href="http://www.pedraazul.mg.gov.br/editalChamamentoPublico022021.php" target="_blank">EDITAL DE CHAMAMENTO P�BLICO N� 02/2021 - CMDCA</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoPublico012021.php" target="_blank">PROCESSO SELETIVO SIMPLIFICADO DA SEC. DE SA�DE 001/2021</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoPublicoProvimento012020.php" target="_blank">CONCURSO P�BLICO DA PREFEITURA - EDITAL 01/2020</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoPublico012020.php" target="_blank">PROCESSO SELETIVO SIMPLIFICADO DA SEC. DE SA�DE 001/2020</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoPublicoProvimentoUAB022020.php" target="_blank">PROCESSO SELETIVO SIMPLIFICADO UAB PEDRA AZUL - EDITAL 02/2020</a><br><br>
+
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/eleicaoConselhoTutelar.php" target="_self">PROCESSO DE ESCOLHA DOS MEMBROS DO CONSELHO TUTELAR - MANDATO 2020/2024</a><br><br>
+
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoPublico012019.php" target="_blank">CONCURSO P�BLICO DA PREFEITURA - EDITAL 01/2019</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoSimplificado.php" target="_blank">PROCESSO SELETIVO SIMPLIFICADO DA SEC. DE SA�DE 001/2019</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/concursoSimplificado02.php" target="_blank">PROCESSO SELETIVO SIMPLIFICADO DA SEC. DE ASSIST�NCIA SOCIAL 002/2019</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/img/Concursos/NotadeesclarecimentoConcurso2019.pdf" target="_self" class="acessibilidade">NOTA DE ESCLARECIMENTO</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/img/Concursos/AtaLicitacaoConcurso.pdf" target="_self" class="acessibilidade">ATA DE LICITA��O DO CONCURSO</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/img/Concursos/ApuracaoLances.pdf" target="_self" class="acessibilidade">APURA��O DE LANCS</a><br><br>
+
+                                                                                   <a href="http://www.pedraazul.mg.gov.br/img/Concursos/ResultadolicitacaoConcurso.pdf" target="_self" class="acessibilidade">RESULTADO DE LICITA��O CONCURSO</a><br><br><br>
+
+                                                                                </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+
+
+
+                                                </div>
+
+                                                <div class="col-lg-4" align="left">
+
+                                                                <h4 class="acessibilidade" style="color:#009900">PORTAL DA TRANSPAR�NCIA</h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                      <div class="col-lg-12">
+                                                                                           <a href="http://cidadesmg.com.br/portaltransparencia/faces/user/portal.xhtml?Param=PedraAzul" class="acessibilidade" target="_blank">PORTAL DA TRANSPAR�NCIA DO MUNIC�PIO</a> <br><br>
+                                                                                           <a href="http://cidadesmg.com.br/portaltransparencia/faces/user/covid19.xhtml?Param=PedraAzul" class="acessibilidade">PORTAL DA TRANSPAR�NCIA DO COVID NO MUNIC�PIO</a> <br><br>                                                               
+
+                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+
+                                                                <h4 class="acessibilidade" style="color:#009900">LEIS DE TRANSPAR�NCIA</h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                      <div class="col-lg-12">
+                                                                                           <a href="http://auriflama.sp.gov.br/files/decreto_7724_16.pdf" class="acessibilidade">LINK DE ACESSO A LEGISLA��O FEDERAL SOBRE TRANSPARENCIA (LEI N� 12.527/2011)</a> <br><br>
+                                                                                           <a href="http://www.transparencia.mg.gov.br/images/stories/decreto-45969.pdf" class="acessibilidade">LINK DE ACESSO A LEGISLA��O FEDERAL SOBRE A TRANSPARENCIA (DEC. ESTADUAL N�
+45.969/2012)</a> <br><br>
+                                                                                           <a href="http://www.transparencia.mg.gov.br/" class="acessibilidade">LINK DE ACESSO AO SITE DA TRANSPAR�NCIA DO ESTADO</a> <br><br>
+                                                                                           <a href="http://www.pedraazul.mg.gov.br/img/Publicacoes/2018-11-2311:26:38:0000001.659_2017.pdf" class="acessibilidade">PLURIANUAL</a> <br><br>
+                                                                                           <a href="http://www.pedraazul.mg.gov.br/img/Publicacoes/2018-11-2309:47:29:0000001.650_2017.pdf" class="acessibilidade">DIRETRIZES OR�AMENTARIAS</a> <br><br>
+                                                                                           <a href="http://www.pedraazul.mg.gov.br/img/Publicacoes/2018-11-2816:19:17:0000001.660_2017.pdf" class="acessibilidade">OR�AMENTARIA ANUAL</a>
+                                                                                           <br><br><br><br>
+                                      </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+
+                                                                <h4 class="acessibilidade" style="color:#009900">AVISOS ESPECIAIS </h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                                <div class="col-lg-12">
+                                                                                        <a href="http://www.pedraazul.mg.gov.br/eleicaoConselhoTutelar.php" target="_self" class="acessibilidade">PROCESSO DE ESCOLHA DOS MEMBROS DO CONSELHO TUTELAR DE PEDRA AZUL/MG � MANDATO 2020/2024</a><br><br>
+                                                                                        <a href="http://www.pedraazul.mg.gov.br/visitaPrefeituraBarragens.php" target="_self" class="acessibilidade">VISITA DA PREFEITURA PARA INSPE��O DAS BARRAGENS DA NACIONAL GRAFITE</a><br><br>
+                                                                                        <a href="http://www.pedraazul.mg.gov.br/covid_saibaMais.php" target="_self" class="acessibilidade">COMBATE AO COVID-19 (NOVO CORONA V�RUS)</a><br><br>
+                                                                                        <a href="http://www.pedraazul.mg.gov.br/eleicoes2020.php" target="_self" class="acessibilidade">PUBLICIDADE INSTITUCIONAL - ANO ELEITORAL � LEI n. � 9.504/97</a><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                                                                 </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+
+                                                </div>
+
+
+                                                <div class="col-lg-4" align="left">
+                                                                <h4 class="acessibilidade" style="color:#009900">LINKS �TEIS</h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                      <div class="col-lg-12">
+                                                                            <a href="http://pedraazul.mg.leg.br/" target="_blank" class="acessibilidade"> C�MARA MUNICIPAL DE PEDRA AZUL</a><br><br>
+
+                                                                                <a href="http://www.receita.fazenda.gov.br/PessoaJuridica/CNPJ/cnpjreva/Cnpjreva_Solicitacao.asp" target="_blank" class="acessibilidade">CONSULTA CNPJ</a><br><br>
+                                                                                <a href="http://www.receita.fazenda.gov.br/Aplicacoes/ATCTA/CPF/ConsultaPublica.asp" target="_blank" class="acessibilidade">CONSULTA CPF</a><br><br>
+                                                                                <a href="http://www2.dataprev.gov.br/PortalSalInternet/faces/pages/calcContribuicoesCI/filiadosAntes/selecionarOpcoesCalculoAntes.xhtml" target="_blank">PIS/NIS</a><br><br>
+                                                                                <a href="http://www2.dataprev.gov.br/ceiweb/index.view" target="_blank" class="acessibilidade">CEI</a><br><br>
+                                                                                <a href="http://www.tse.jus.br/eleitor/servicos/titulo-e-local-de-votacao/consulta-spor-nome" target="_blank" class="acessibilidade">T�TULO DE ELEITOR</a><br><br>
+                                                                                <a href="http://www.iof.mg.gov.br/" target="_blank" class="acessibilidade">DI�RIO OFICIAL DO ESTADO DE MG </a><br><br>
+                                                                                <a href="http://www.copasa.com.br/wps/portal/internet" target="_blank" class="acessibilidade"> COPASA</a>     <br><br>
+                                                                                <a href="http://www.cemig.com.br/pt-br/atendimento/Paginas/default.aspx" target="_blank" class="acessibilidade"> CEMIG</a>
+
+                                                                                <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+                                                                          </div>
+                                                                        </div>
+                                                                  </div>
+                                                                </div>
+
+                                                                <h4 class="acessibilidade" style="color:#009900">RH / CONT�BIL</h4>
+                                                                <div class="thumbnail">
+                                  <div class="caption">
+                                                                <div class="row">
+                                                                                <div class="col-lg-9">
+                                                                                        <a href="http://cidadesmg.com.br/portaltransparencia/faces/user/FDiariasViagem.xhtml?Param=PedraAzul" target="_self" class="acessibilidade">DI�RIAS DE VIAGEM</a><br><br>
+                                                                                        <a href="http://cidadesmg.com.br/portaltransparencia/faces/user/folha.xhtml?Param=PedraAzul" target="_self" class="acessibilidade">PER�ODO DE AFASTAMENTO</a><br><br>
+                                                                                        <a href="http://cidadesmg.com.br/portaltransparencia/faces/user/folha.xhtml?Param=PedraAzul" target="_self" class="acessibilidade">REGISTRO DE AUX�LIOS E VERBAS</a><br><br><br><br><br><br><br><br><br><br><br>
+                                                                                </div>
+                                                                    </div>
+                                                                  </div>
+                                                                </div>
+
+
+
+                                                </div>
+                                        </div>
+                                 </div>
+                 </div>
+
+                 <br><br><br><br>
+
+                 <div class="banner">
+                   <div class="container">
+                                <div class="row">
+                                        <div class="col-lg-12" align="center">
+                                                <br><br><h2>Pedra Azul 113 anos! </h2><br><br><br><br>
+                                        </div>
+                                </div>
+                        </div>
+                 </div>
+
+                 <br><br><br><br>
+
+             <div class="container">
+                   <div class="row">
+              <div class="col-lg-6 col-sm-6">
+                                          <?php
+                                                  $i = 0;
+                                                  include("GerBLUStone/bdconBLUStone/con_bancoBLUStone.php");
+                                                  $query = "select idNoticia,
+                                                                                        tituloNoticia,
+                                                                                        descricaoNoticia,
+                                                                                        minutaNoticia,
+                                                                                        date_format(dataNoticia, '%d/%m/%Y') as data,
+                                                                                        statusNoticia,
+                                                                                        linkNoticia,
+                                                                                        fotoR,
+                                                                                        fotoR2,
+                                                                                        fotoE,
+                                                                                        fotoE2
+                                                                         from  noticia
+                                                                         where statusNoticia = 'A'
+                                                                         and principalNoticia = 'SIM'
+                                                                         and tipo = 'N'
+                                                                         order by dataNoticia DESC
+                                                                         limit 3
+                                                                        ";
+
+                                                   $result = mysql_query($query,$con);
+
+                                                   ### Testa retorno
+
+                                                   if(mysql_num_rows($result) < 1) {
+                                                          echo "";
+                                                   }
+                                                   else {
+                                                          echo "
+                                                           <marquee behavior=\"scroll\" direction=\"left\" onmouseover=\"this.stop();\" onmouseout=\"this.start();\">
+                                                                   <a href=\"noticias.php\"><h2 class=\"acessibilidade\" style=\"color:#009900\">Acompanhe aqui as principais not�cias da sua cidade!</h2></a>
+                                                           </marquee>
+
+                                                           <h2 class=\"page-header\" class=\"acessibilidade\" style=\"color:#009900\"><b>NOT�CIAS EM DESTAQUE</b></h2>";
+                                                   }
+
+                                                   while($arrayresult = mysql_fetch_array($result))
+                                                   {
+
+                                                   $i++;
+                                  ?>
+
+                                  <h3 style="color:#009900"> <p align="justify" class="acessibilidade">
+                                  <a href="noticiaCompleta.php?codigo=<?php  print("$arrayresult[idNoticia]");?>" class="acessibilidade"><?php print("$arrayresult[tituloNoticia]");?></a></p></h3>                                          <p  align="justify" class="acessibilidade"><?php  print("$arrayresult[data]");?></p>
+                                  <p  align="justify" class="acessibilidade"><?php print nl2br("$arrayresult[minutaNoticia]");?> </p><br>
+
+                                  <?php
+                                   }
+                                  ?>
+
+                                  <div align="right">
+                                        <a href="noticias.php" class="btn btn-success active"> Ver Todas as Not�cias</a>
+                                  </div>
+                          </div>
+
+                      <div class="col-lg-5 col-lg-offset-1 col-sm-6">
+                               <br><img class="img-responsive" src="img/leituraBlog.jpg" alt="">
+                      </div>
+
+            </div>
+    </div>
+
+    <br><br>
+
+        <div class="container">
+        <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                                <h2 class="page-header acessibilidade" style="color:#009900"><i class="fa fa-newspaper-o" ></i> <b>V�DEOS</b></h2>
+                                                <?php
+                                                           $queryVideo = "SELECT enderecoVd,
+                                                                                 tituloVd,
+                                                                                                         descricaoVd
+                                                                                          FROM  video
+                                                                                          WHERE statusVd = 'A'
+                                                                                          LIMIT 3";
+
+                                                           $resultVideo = mysql_query($queryVideo,$con);
+                                                           while($arrayresultVideo = mysql_fetch_array($resultVideo)){
+                                            ?>
+                               <div class="col-md-4">
+                                                <?php
+                                                                   if(!empty($arrayresultVideo[enderecoVd])) {
+                                                                         echo "<div class=\"embed-responsive embed-responsive-16by9\">
+                                                                                              <iframe src=\"$arrayresultVideo[enderecoVd]\" frameborder=\"0\" allow=\"accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe><br><br><br></div>
+                                                                                   <h3 style=\"color:#666666\"><b>$arrayresultVideo[tituloVd]</b></h3>
+                                           $arrayresultVideo[descricaoVd]<br><br><br><br>";
+                                                                   }
+                                            ?>
+                                                           </div>
+                                                <?php
+                                                           }
+                                                ?>
+
+              </div>
+                          <div class="col-lg-12 col-sm-12">
+                                    <div align="center">
+                                                    <a href="videos.php" class="btn btn-success active">VER TODOS OS V�DEOS</a>
+
+                                                </div>
+                          </div>
+
+             </div>
+         </div>
+
+         <br><br>
+
+        <div class="container">
+            <div class="row">
+          <div class="col-lg-10">
+                                   <br><br>
+                                   <h2 class="page-header acessibilidade" style="color:#009900"><span class="glyphicon glyphicon-list"></span> <b>RECEBA A NOSSA MALA DIRETA </b></h2><br><br>
+
+                                   <p align="justify"> Cadastre-se para receber a nossa News Letter, com not�cias e informa��es sobre cidade.</p>
+
+                                   <div class="site-block text-center">
+                                                <form  method="POST" class="form-horizontal" action="SalvarNews.php">
+                                                        <div class="form-group">
+                                                                <div class="col-md-12">
+
+                                                                        <div class="input-group input-group-lg">
+
+                                                                                <input type="nome" name="email" id="nome" class="form-control" placeholder="Seu Email">
+
+                                                                                <div class="input-group-btn">
+                                                                                        <button type="submit" class="btn btn-success"> Cadastrar  &nbsp;&nbsp;<span class="glyphicon glyphicon-check" aria-hidden="true"> </span></button>
+                                                                                </div>
+
+                                                                        </div>
+                                                                </div>
+                                                        </div>
+                                                </form>
+                                        </div>
+          </div>
+                </div>
+        </div>
+
+
+
+
+        </div>
+
+        <br><br><br><br>
+
+    <?php include ('rodape.php');?>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+        <script>
+                function fonte(e){
+                var elemento = $(".acessibilidade");
+                var fonte = elemento.css('font-size');
+                        if (e == 'a') {
+                                elemento.css("fontSize", parseInt(fonte) + 1);
+                        } else if('d'){
+                                elemento.css("fontSize", parseInt(fonte) - 1);
+                        }
+                }
+        </script>
+
+    <!-- Script to Activate the Carousel -->
+    <script>
+    $('.carousel').carousel({
+        interval: 5000 //changes the speed
+    })
+    </script>
+
+</body>
+
+</html>
+<?php   include ('logsAcessoSite.php'); ?>
