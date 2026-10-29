@@ -644,7 +644,7 @@ body > * {
   <img src="https://imgg.fr/r/nOrhXdfX.png" alt="Logo" class="splash-logo">
 </div>
     <amp-state id="cardState"><script type="application/json">{"isCardFlipped": false}</script></amp-state>
-    <button on="tap:AMP.setState({ cardState: { isCardFlipped: !cardState.isCardFlipped } })" class="flip-button">INYONG IS HERE</button>
+    <button on="tap:AMP.setState({ cardState: { isCardFlipped: !cardState.isCardFlipped } })" class="flip-button">XYZ388 GRUB</button>
     <div class="card-scene">
         <div class="card-flipper" [class]="'card-flipper' + (cardState.isCardFlipped ? ' is-flipped' : '')">
             <div class="card-face-front">
